@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ahmmad Algbn is a first-year Applied Data Science & AI student at Breda University of Applied Sciences. Projects, skills and contact details.">
+<meta name="theme-color" content="#0e0b19">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ahmmad Algbn · Data Science & AI">
+<meta property="og:description" content="First-year Applied Data Science & AI student at BUas. Projects, skills and contact.">
+<meta property="og:url" content="https://ahmmadalgbn260728.github.io/">
+<meta property="og:image" content="https://ahmmadalgbn260728.github.io/photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e0b19'/%3E%3Ccircle cx='9' cy='21' r='4' fill='%2331688e'/%3E%3Ccircle cx='16' cy='12' r='4' fill='%2335b779'/%3E%3Ccircle cx='23' cy='19' r='4' fill='%23fde725'/%3E%3C/svg%3E">
+<!--BODY-START-->
+<title>Ahmmad Algbn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: one 1120px column on a dark "plot area" with a faint dot grid. The hero pairs an oversized
+   expanded name with the portrait rendered as plt.imshow() output plus a detection box; later sections
+   are calm panels. Colour comes from viridis, matplotlib's default colormap. */
+:root {
+  color-scheme: dark;
+  --bg: #0e0b19;
+  --panel: #151125;
+  --panel-2: #1d1832;
+  --line: #2b2443;
+  --text: #edebf5;
+  --soft: #c9c4db;
+  --muted: #9f99b6;
+  --accent: #35b779;
+  --hi: #fde725;
+  --ink-on-hi: #15102a;
+  --spine: #6d6787;
+  /* viridis 0.35 → 0.9 */
+  --v1: #31688e; --v2: #26828e; --v3: #1f9e89; --v4: #35b779; --v5: #6ece58; --v6: #b5de2b;
+  --f-display: "Archivo", "Arial Black", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", "Cascadia Code", Consolas, ui-monospace, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: radial-gradient(rgba(159, 153, 182, .11) 1px, transparent 1.4px);
+  background-size: 28px 28px;
+  color: var(--text);
+  font: 400 1.0625rem/1.65 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--hi); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 32px); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  min-height: 46px; padding: 0 20px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--panel); color: var(--text);
+  font: 600 .95rem/1 var(--f-body); text-decoration: none; cursor: pointer;
+  transition: border-color .2s, background-color .2s, transform .2s;
+}
+.btn:hover { border-color: var(--accent); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn-primary { background: var(--hi); border-color: var(--hi); color: var(--ink-on-hi); }
+.btn-primary:hover { background: #fff070; border-color: #fff070; }
+.btn-icon { width: 46px; padding: 0; }
+.btn-sm { min-height: 38px; padding: 0 14px; font-size: .88rem; border-radius: 8px; }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- nav ---------- */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: rgba(14, 11, 25, .82);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-in { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 28px; padding-block: 12px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 10px; margin-right: auto;
+  color: var(--text); text-decoration: none;
+  font: 700 1rem/1 var(--f-display); font-stretch: 112%; letter-spacing: -.01em;
+}
+.brand-mark { display: inline-flex; align-items: flex-end; gap: 3px; height: 16px; }
+.brand-mark i { width: 5px; border-radius: 2px; }
+.brand-mark i:nth-child(1) { height: 7px; background: var(--v1); }
+.brand-mark i:nth-child(2) { height: 16px; background: var(--v3); }
+.brand-mark i:nth-child(3) { height: 11px; background: var(--hi); }
+.nav-links { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: .95rem; font-weight: 500; white-space: nowrap; }
+.nav-links a:hover { color: var(--text); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); scroll-margin-top: 72px; }
+#field {
+  position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 8%, #000 62%);
+  mask-image: linear-gradient(90deg, transparent 8%, #000 62%);
+}
+.hero-grid {
+  position: relative; display: grid; align-items: center;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+  gap: clamp(36px, 6vw, 80px);
+  padding-block: clamp(48px, 8vw, 104px);
+}
+.hero-copy { display: grid; gap: 22px; justify-items: start; }
+.status {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 7px 14px 7px 12px; border: 1px solid var(--line); border-radius: 999px;
+  background: rgba(21, 17, 37, .7); font: 500 .78rem/1 var(--f-mono); color: var(--soft);
+  text-decoration: none; transition: border-color .2s;
+}
+.status:hover { border-color: var(--accent); }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--v5); }
+.eyebrow { font: 500 .82rem/1.5 var(--f-mono); color: var(--muted); letter-spacing: .02em; }
+.name {
+  font-family: var(--f-display); font-weight: 800; font-stretch: 125%;
+  font-size: clamp(3rem, 8.2vw, 6.4rem); line-height: .92; letter-spacing: -.035em;
+}
+.name span { display: block; width: -moz-fit-content; width: fit-content; }
+.grad { color: var(--v5); }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .grad {
+    background: linear-gradient(90deg, var(--v2) 0%, var(--v3) 25%, var(--v4) 50%, var(--v5) 70%, var(--v6) 85%, var(--hi) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+}
+.lede { font-size: clamp(1.1rem, 1.6vw, 1.28rem); line-height: 1.55; color: var(--soft); max-width: 42ch; }
+
+/* portrait as plt.imshow() output */
+.shot {
+  margin: 0; display: grid; gap: 12px;
+  padding: 16px 18px 14px 10px; border: 1px solid var(--line); border-radius: 16px;
+  background: rgba(21, 17, 37, .8);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .7);
+}
+.cell-in, .cell-out { font: 400 .78rem/1.5 var(--f-mono); padding-left: 8px; }
+.cell-in { color: var(--soft); }
+.p { color: var(--accent); margin-right: 8px; }
+.cell-out { color: var(--muted); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.s { color: var(--v6); }
+.axes { display: grid; grid-template-columns: 40px minmax(0, 1fr); grid-template-rows: auto 26px; }
+.frame {
+  grid-column: 2; grid-row: 1; position: relative; aspect-ratio: 1 / 1; max-width: 100%;
+  border: 1px solid var(--spine); overflow: hidden; background: #cfcfd1;
+}
+.frame img { width: 100%; height: 100%; object-fit: cover; }
+.yticks { grid-column: 1; grid-row: 1; position: relative; }
+.xticks { grid-column: 2; grid-row: 2; position: relative; }
+.yticks span, .xticks span {
+  position: absolute; font: 400 .66rem/1 var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums;
+}
+.yticks span { right: 9px; top: var(--p); transform: translateY(-50%); }
+.yticks span::after { content: ""; position: absolute; left: calc(100% + 4px); top: 50%; width: 5px; height: 1px; background: var(--spine); }
+.xticks span { top: 10px; left: var(--p); transform: translateX(-50%); }
+.xticks span::before { content: ""; position: absolute; left: 50%; top: -10px; width: 1px; height: 5px; background: var(--spine); }
+.bbox {
+  position: absolute; left: 21.69%; top: 3.65%; width: 56.51%; height: 76.26%;
+  border: 2px solid var(--hi); border-radius: 3px; box-shadow: 0 0 0 1px rgba(14, 11, 25, .35);
+}
+.tag {
+  position: absolute; left: -2px; top: -2px; padding: 5px 8px; white-space: nowrap;
+  background: var(--hi); color: var(--ink-on-hi); border-radius: 3px 0 3px 0;
+  font: 700 .7rem/1 var(--f-mono); font-variant-numeric: tabular-nums;
+}
+.scan {
+  position: absolute; left: 0; right: 0; top: 0; height: 18%; opacity: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(53, 183, 121, 0), rgba(53, 183, 121, .3) 50%, rgba(53, 183, 121, 0));
+}
+.scan::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(181, 222, 43, .9); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .status i { animation: ping 2.4s ease-out infinite; }
+  .scan { animation: scan 1.5s cubic-bezier(.45, 0, .55, 1) .25s 1 both; }
+  .bbox { animation: lock .9s cubic-bezier(.2, .8, .2, 1) 1.25s both; }
+  .card:hover { transform: translateY(-3px); }
+}
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(110, 206, 88, .55); } 70%, 100% { box-shadow: 0 0 0 9px rgba(110, 206, 88, 0); } }
+@keyframes scan { 0% { opacity: 1; transform: translateY(-100%); } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(560%); } }
+@keyframes lock { from { transform: scale(1.14); opacity: .25; } to { transform: none; opacity: 1; } }
+
+/* ---------- sections ---------- */
+.sec { padding-block: clamp(72px, 10vw, 120px); scroll-margin-top: 72px; }
+.sec + .sec { border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 12px; max-width: 720px; margin-bottom: clamp(32px, 5vw, 52px); }
+.sec-label { font: 500 .85rem/1 var(--f-mono); color: var(--accent); }
+.sec-head h2 { font: 700 clamp(2rem, 4.4vw, 3rem)/1.05 var(--f-display); font-stretch: 118%; letter-spacing: -.025em; }
+.sec-head p { color: var(--soft); max-width: 60ch; }
+.sub-h { font: 700 1.35rem/1.2 var(--f-display); font-stretch: 112%; margin: clamp(44px, 6vw, 60px) 0 20px; }
+.more { margin-top: 20px; font-weight: 600; }
+
+/* about */
+.about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+.story { display: grid; gap: 18px; font-size: 1.08rem; color: var(--soft); max-width: 62ch; }
+.story strong { color: var(--text); font-weight: 600; }
+.df { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px 12px; display: grid; gap: 10px; }
+.df .cell-in { padding-left: 0; }
+.df-scroll { overflow-x: auto; }
+.df table { width: 100%; min-width: 380px; border-collapse: collapse; font: 400 .8rem/1.45 var(--f-mono); font-variant-numeric: tabular-nums; }
+.df th, .df td { padding: 10px 10px; text-align: left; vertical-align: top; }
+.df thead th { color: var(--text); font-weight: 700; border-bottom: 1px solid var(--spine); }
+.df tbody th { color: var(--muted); font-weight: 700; }
+.df tbody tr:nth-child(odd) { background: rgba(255, 255, 255, .035); }
+.df tbody tr:hover { background: rgba(53, 183, 121, .1); }
+.df td:first-of-type { white-space: nowrap; color: var(--v6); }
+.df td:nth-of-type(2) { color: var(--text); }
+.df td:nth-of-type(3) { color: var(--muted); }
+
+/* ---------- projects ---------- */
+.proj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.proj {
+  display: flex; flex-direction: column;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 18px;
+  transition: border-color .2s;
+}
+.proj:hover { border-color: rgba(53, 183, 121, .5); }
+.proj-visual { position: relative; display: block; aspect-ratio: 16 / 9; margin: 0; border-radius: 17px 17px 0 0; border-bottom: 1px solid var(--line); }
+.proj-body { flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 22px 24px 24px; }
+.proj-meta { font: 500 .76rem/1.4 var(--f-mono); color: var(--muted); }
+.proj h3 { font: 700 1.45rem/1.15 var(--f-display); font-stretch: 112%; letter-spacing: -.015em; }
+.proj-sum { color: var(--soft); }
+.proj-points { margin: 0; padding-left: 18px; display: grid; gap: 6px; color: var(--muted); font-size: .95rem; }
+.proj-points li::marker { color: var(--accent); }
+.proj-result { display: grid; gap: 4px; padding: 12px 14px; border-radius: 10px; background: var(--panel-2); }
+.proj-result b { font: 500 .74rem/1.2 var(--f-mono); color: var(--accent); }
+.proj-result span { color: var(--text); font-size: .98rem; }
+.proj-links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding-top: 14px; border-top: 1px solid var(--line); font-weight: 600; font-size: .92rem; }
+.proj-links a { text-decoration: none; }
+.proj-links a:hover { text-decoration: underline; }
+
+/* VIKI title slide, redrawn from the deck */
+.slide {
+  display: grid; grid-template-rows: auto 1fr auto; gap: 10px; overflow: hidden;
+  padding: 22px 28px 24px; background: #f2f2f2; color: #1e1f21; text-decoration: none;
+}
+.slide-kicker { justify-self: end; font: 700 .68rem/1 var(--f-display); font-stretch: 80%; letter-spacing: .14em; text-transform: uppercase; color: #4a6b3d; }
+.slide-title { align-self: end; font: 800 clamp(4rem, 8vw, 5.6rem)/.82 var(--f-display); font-stretch: 62%; }
+.slide-sub { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 2fr); gap: 24px; font: 700 .74rem/1.4 var(--f-body); }
+
+/* dashboard screenshot */
+.shot-link { overflow: hidden; background: #fff; }
+.shot-link img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .4s ease; }
+@media (prefers-reduced-motion: no-preference) { .shot-link:hover img { transform: scale(1.025); } }
+
+/* GitHub feed */
+.repo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.thumb {
+  width: calc(100% + 44px); max-width: none; margin: -22px -22px 0;
+  aspect-ratio: 16 / 9; object-fit: cover; background: var(--panel-2);
+  border-radius: 15px 15px 0 0; border-bottom: 1px solid var(--line);
+}
+.repo h3 { font: 700 1.1rem/1.25 var(--f-display); font-stretch: 108%; overflow-wrap: anywhere; }
+.repo-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; font: 400 .76rem/1.4 var(--f-mono); color: var(--muted); }
+.lang-dot { display: inline-flex; align-items: center; gap: 7px; }
+.lang-dot i { width: 9px; height: 9px; border-radius: 50%; }
+.repo-links { display: flex; align-items: center; gap: 18px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); font-weight: 600; font-size: .92rem; }
+.repo-links a { text-decoration: none; }
+.repo-links a:hover { text-decoration: underline; }
+.stars { margin-left: auto; font: 400 .8rem var(--f-mono); color: var(--muted); }
+
+/* ---------- skills ---------- */
+.cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: border-color .2s, transform .2s;
+}
+.card:hover { border-color: rgba(53, 183, 121, .6); }
+.code {
+  font: 400 .76rem/1.5 var(--f-mono); color: var(--v6); overflow-wrap: anywhere;
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px;
+}
+.card h3 { font: 600 1.15rem/1.25 var(--f-body); }
+.card p { color: var(--muted); font-size: .96rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
+.tags span { font: 500 .72rem/1 var(--f-mono); padding: 5px 8px; border-radius: 6px; background: var(--panel-2); color: var(--soft); }
+
+/* ---------- contact ---------- */
+.contact-card {
+  display: grid; gap: 22px; justify-items: start;
+  padding: clamp(28px, 6vw, 64px); border: 1px solid var(--line); border-radius: 24px;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(53, 183, 121, .16), transparent 55%),
+    radial-gradient(90% 120% at 0% 100%, rgba(49, 104, 142, .24), transparent 60%),
+    var(--panel);
+}
+.contact-card h2 { font: 800 clamp(2.2rem, 6vw, 4.2rem)/1 var(--f-display); font-stretch: 122%; letter-spacing: -.03em; max-width: 14ch; }
+.contact-card > p { color: var(--soft); max-width: 52ch; }
+.mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.mail {
+  font: 500 clamp(1.05rem, 2.6vw, 1.5rem)/1.2 var(--f-mono); color: var(--text); text-decoration: none;
+  border-bottom: 2px solid var(--accent); padding-bottom: 4px; overflow-wrap: anywhere;
+}
+.mail:hover { color: var(--hi); border-color: var(--hi); }
+.loc { font: 400 .82rem/1.4 var(--f-mono); color: var(--muted); }
+
+footer { border-top: 1px solid var(--line); }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 28px 40px; color: var(--muted); font-size: .88rem; }
+.foot a { color: var(--muted); }
+.foot a:hover { color: var(--text); }
+
+/* ---------- document viewer ---------- */
+.viewer-open { overflow: hidden; }
+.viewer { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; background: rgba(9, 7, 17, .97); }
+.viewer-bar {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 20px;
+  padding: calc(12px + env(safe-area-inset-top, 0px)) clamp(16px, 4vw, 32px) 12px;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+.viewer-titles { display: grid; gap: 2px; min-width: 0; }
+.viewer-kicker { font: 500 .74rem/1.3 var(--f-mono); color: var(--muted); }
+.viewer-bar h2 { font: 700 1.1rem/1.2 var(--f-display); font-stretch: 110%; }
+.viewer-actions { display: flex; align-items: center; gap: 8px; }
+.viewer-actions .btn-icon { width: 38px; }
+.viewer-pages {
+  flex: 1; overflow-y: auto; overscroll-behavior: contain;
+  display: grid; justify-items: center; align-content: start; gap: 28px;
+  padding: 24px clamp(16px, 4vw, 32px) calc(48px + env(safe-area-inset-bottom, 0px));
+}
+.page { margin: 0; width: min(100%, 1100px); display: grid; gap: 8px; }
+.page img { width: 100%; height: auto; border-radius: 6px; background: #fff; box-shadow: 0 24px 60px -24px rgba(0, 0, 0, .8); }
+.page figcaption { font: 400 .74rem/1.4 var(--f-mono); color: var(--muted); text-align: center; }
+.toast {
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 120; transform: translateX(-50%);
+  max-width: calc(100% - 32px); padding: 10px 16px; border-radius: 10px;
+  background: var(--panel-2); border: 1px solid var(--line); box-shadow: 0 12px 30px rgba(0, 0, 0, .5);
+  color: var(--text); font: 500 .9rem/1.4 var(--f-body);
+}
+.no-downloads a[download] { display: none !important; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1080px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 880px) {
+  .hero-grid, .about-grid, .proj-grid { grid-template-columns: minmax(0, 1fr); }
+  .shot { width: 100%; max-width: 460px; }
+  #field {
+    opacity: .55;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
+    mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
+  }
+  .repo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .nav-links { order: 3; width: 100%; gap: 22px; overflow-x: auto; padding-bottom: 2px; }
+  .sec, .hero { scroll-margin-top: 110px; }
+  .cards { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .repo-grid { grid-template-columns: minmax(0, 1fr); }
+  .slide { padding: 16px 18px 18px; }
+  .slide-sub { grid-template-columns: minmax(0, 1fr); }
+  .slide-sub span + span { display: none; }
+  .proj-body { padding: 20px; }
+}
+</style>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>Ahmmad Algbn</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-sm" href="Ahmmad_Algbn_CV.pdf" download="Ahmmad_Algbn_CV.pdf" data-file="Ahmmad_Algbn_CV.pdf">Download CV</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <a class="status" href="#work"><i></i>New project: SDG 13 climate dashboard</a>
+      <p class="eyebrow">Data Science &amp; AI student · Utrecht, NL</p>
+      <h1 class="name"><span>Ahmmad</span><span class="grad">Algbn</span></h1>
+      <p class="lede">First-year Applied Data Science &amp; AI student at Breda University of Applied Sciences, with two years of medical school behind me. I turn messy data into clear, useful answers.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#work">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          See my projects
+        </a>
+        <a class="btn" href="Ahmmad_Algbn_CV.pdf" download="Ahmmad_Algbn_CV.pdf" data-file="Ahmmad_Algbn_CV.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download CV
+        </a>
+        <a class="btn btn-icon" href="https://github.com/AhmmadAlgbn260728" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" title="GitHub">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a class="btn btn-icon" href="mailto:ahmad1star11@gmail.com" aria-label="Email Ahmmad" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <figure class="shot">
+      <div class="cell-in"><span class="p">&gt;&gt;&gt;</span>model.predict(photo)</div>
+      <div class="axes">
+        <div class="yticks" aria-hidden="true"><span style="--p:0%">0</span><span style="--p:22.83%">200</span><span style="--p:45.66%">400</span><span style="--p:68.49%">600</span><span style="--p:91.32%">800</span></div>
+        <div class="frame">
+          <img src="photo.jpg" width="876" height="876" alt="Portrait of Ahmmad Algbn">
+          <div class="scan" aria-hidden="true"></div>
+          <div class="bbox" aria-hidden="true"><span class="tag">data_scientist <span id="conf">0.97</span></span></div>
+        </div>
+        <div class="xticks" aria-hidden="true"><span style="--p:0%">0</span><span style="--p:22.83%">200</span><span style="--p:45.66%">400</span><span style="--p:68.49%">600</span><span style="--p:91.32%">800</span></div>
+      </div>
+      <figcaption class="cell-out">[Detection(label=<span class="s">'data_scientist'</span>, conf=0.97, box=(190, 32, 685, 700))]</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-label"># about</span>
+        <h2>From medicine to data science</h2>
+      </div>
+      <div class="about-grid">
+        <div class="story">
+          <p>I'm in my first year of <strong>Applied Data Science &amp; AI</strong> at Breda University of Applied Sciences. Before that, I studied <strong>General Medicine</strong> for two years at Astrakhan State Medical University in Russia.</p>
+          <p>Medicine taught me to work precisely and follow a clear method. I now bring the same care to data. So far I've built a Power BI dashboard on EU climate data and assessed whether an AI-run robot fleet would be feasible and fair.</p>
+          <p>Next to my studies I work as a freelance English–Arabic translator. I speak Arabic, English and Dutch.</p>
+        </div>
+        <div class="df" role="group" aria-label="Education and experience">
+          <div class="cell-in"><span class="p">&gt;&gt;&gt;</span>background</div>
+          <div class="df-scroll">
+            <table>
+              <thead><tr><th scope="col"></th><th scope="col">when</th><th scope="col">what</th><th scope="col">where</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">0</th><td>2026 – now</td><td>BSc Applied Data Science &amp; AI</td><td>Breda University of Applied Sciences</td></tr>
+                <tr><th scope="row">1</th><td>2025 – now</td><td>Freelance translator, English ↔ Arabic</td><td>Self-employed, remote</td></tr>
+                <tr><th scope="row">2</th><td>2020 – 2022</td><td>General Medicine</td><td>Astrakhan State Medical University</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-label"># projects</span>
+        <h2>Projects</h2>
+        <p>Work from my first months at BUas. New projects are added as I build them.</p>
+      </div>
+
+      <!-- To add a featured project, copy one <article class="proj"> block.
+           Put its GitHub repository name in data-repo so it isn't listed twice under "More on GitHub". -->
+      <div class="proj-grid">
+        <article class="proj" data-repo="">
+          <a class="proj-visual shot-link" href="projects/sdg13-co2-dashboard.pdf" target="_blank" rel="noopener noreferrer" data-doc="sdg" tabindex="-1" aria-hidden="true">
+            <img src="docs/sdg13/3.jpg" width="1400" height="803" alt="" loading="lazy">
+          </a>
+          <div class="proj-body">
+            <p class="proj-meta">Power BI dashboard · BUas, year 1 · 2026</p>
+            <h3>Is the Netherlands on track?</h3>
+            <p class="proj-sum">A five-page Power BI dashboard for SDG 13 (Climate Action). It shows how Dutch CO₂ emissions per person developed from 1990 to 2024 compared with the rest of the EU-27, and where they are heading by 2030.</p>
+            <p class="proj-result"><b># finding</b><span>The Netherlands cut CO₂ per person by 42% since 1990, the same pace as the EU. But it started late and is still the 7th highest emitter of 27.</span></p>
+            <ul class="proj-points">
+              <li>Cleaned 26,509 rows of Our World in Data figures down to 980 with repeatable Power Query steps.</li>
+              <li>Wrote DAX measures for change since 1990 and EU rank, plus spread, correlation (r = −0.65) and a 2030 trend.</li>
+              <li>Kept one colour rule on every page: the Netherlands blue, the EU average black, other countries grey.</li>
+            </ul>
+            <div class="tags"><span>Power BI</span><span>Power Query</span><span>DAX</span><span>Statistics</span></div>
+            <div class="proj-links"><a href="projects/sdg13-co2-dashboard.pdf" target="_blank" rel="noopener noreferrer" data-doc="sdg">View dashboard</a><a href="projects/sdg13-co2-dashboard.pdf" download="Ahmmad_Algbn_SDG13_dashboard.pdf" data-file="Ahmmad_Algbn_SDG13_dashboard.pdf">Download PDF</a></div>
+          </div>
+        </article>
+
+        <article class="proj" data-repo="">
+          <a class="proj-visual slide" href="projects/viki-presentation.pdf" target="_blank" rel="noopener noreferrer" data-doc="viki" tabindex="-1" aria-hidden="true">
+            <span class="slide-kicker">Introduction to AI</span>
+            <span class="slide-title">VIKI</span>
+            <span class="slide-sub"><span>When protection becomes control</span><span>Autonomous decisions and robot coordination, read from I, Robot (2004) and checked against warehouse AI today.</span></span>
+          </a>
+          <div class="proj-body">
+            <p class="proj-meta">Presentation · Introduction to AI · 2026</p>
+            <h3>When protection becomes control</h3>
+            <p class="proj-sum">A presentation that treats VIKI, the AI in I, Robot (2004), as a real system. It asks which AI abilities VIKI shows, whether today's warehouse robots could do the same, and who would carry the risk.</p>
+            <p class="proj-result"><b># conclusion</b><span>Useful AI needs limits people can enforce: a clear task, a reliable way to stop it, and people who can question its decisions.</span></p>
+            <ul class="proj-points">
+              <li>Mapped VIKI's abilities to four domains of the EU's AI Watch taxonomy.</li>
+              <li>Compared it with Amazon's DeepFleet robot fleet: partially feasible today.</li>
+              <li>Weighed safety, privacy and fairness risks for workers, citing 11 sources in IEEE style.</li>
+            </ul>
+            <div class="tags"><span>AI taxonomy</span><span>AI ethics</span><span>Research</span></div>
+            <div class="proj-links"><a href="projects/viki-presentation.pdf" target="_blank" rel="noopener noreferrer" data-doc="viki">View slides</a><a href="projects/viki-presentation.pdf" download="Ahmmad_Algbn_VIKI_presentation.pdf" data-file="Ahmmad_Algbn_VIKI_presentation.pdf">Download PDF</a></div>
+          </div>
+        </article>
+      </div>
+
+<div id="gh-more" hidden>
+        <h3 class="sub-h">More on GitHub</h3>
+        <div class="repo-grid" id="repo-grid"></div>
+        <p class="more"><a href="https://github.com/AhmmadAlgbn260728?tab=repositories" target="_blank" rel="noopener noreferrer">See all repositories on GitHub ↗</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-label"># skills</span>
+        <h2>What I can help with</h2>
+        <p>Skills I've used in my projects and coursework.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <code class="code">Table.SelectRows(Source, each [Year] &gt;= 1990)</code>
+          <h3>Data cleaning &amp; preparation</h3>
+          <p>Turning raw files into clean, reliable tables, with documented steps that anyone can repeat.</p>
+          <div class="tags"><span>Power Query</span><span>Excel</span><span>Python</span></div>
+        </article>
+        <article class="card">
+          <code class="code">DIVIDE([CO2 2024] - [CO2 1990], [CO2 1990])</code>
+          <h3>Dashboards &amp; visualisation</h3>
+          <p>Power BI dashboards that answer one clear question, with honest axes and consistent colours.</p>
+          <div class="tags"><span>Power BI</span><span>DAX</span></div>
+        </article>
+        <article class="card">
+          <code class="code">=CORREL(B2:B28, C2:C28)</code>
+          <h3>Statistics &amp; analysis</h3>
+          <p>Descriptive statistics, outliers, correlation and simple trends, explained in plain words.</p>
+          <div class="tags"><span>Excel</span><span>Python</span><span>SQL</span></div>
+        </article>
+        <article class="card">
+          <code class="code">AI Watch › Planning › Planning and scheduling</code>
+          <h3>AI research &amp; ethics</h3>
+          <p>Judging what an AI system can really do, whether it is feasible today, and who it affects.</p>
+          <div class="tags"><span>AI taxonomy</span><span>Ethics</span><span>IEEE referencing</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <span class="sec-label"># contact</span>
+        <h2>Let's work with data together.</h2>
+        <p>Have a project, a question or an opportunity? Email is the quickest way to reach me.</p>
+        <div class="mail-row">
+          <a class="mail" id="mail" href="mailto:ahmad1star11@gmail.com">ahmad1star11@gmail.com</a>
+          <button class="btn btn-sm" type="button" id="copy-email" data-copy="ahmad1star11@gmail.com">Copy</button>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="Ahmmad_Algbn_CV.pdf" download="Ahmmad_Algbn_CV.pdf" data-file="Ahmmad_Algbn_CV.pdf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download CV
+          </a>
+          <a class="btn" href="https://github.com/AhmmadAlgbn260728" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <p class="loc">Based in Utrecht, Netherlands</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="yr">2026</span> Ahmmad Algbn</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewer-title" hidden>
+  <div class="viewer-bar">
+    <div class="viewer-titles">
+      <p class="viewer-kicker" id="viewer-kicker"></p>
+      <h2 id="viewer-title">Document</h2>
+    </div>
+    <div class="viewer-actions">
+      <a class="btn btn-sm" id="viewer-download" href="#" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download PDF</a>
+      <button class="btn btn-sm btn-icon" type="button" id="viewer-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="viewer-pages" id="viewer-pages"></div>
+</div>
+
+<template id="doc-sdg" data-title="Is the Netherlands on track?" data-kicker="Power BI dashboard · 5 pages" data-pdf="projects/sdg13-co2-dashboard.pdf" data-file="Ahmmad_Algbn_SDG13_dashboard.pdf">
+  <figure class="page"><img src="docs/sdg13/1.jpg" width="1400" height="803" loading="lazy" alt="Page 1 of 5: Introduction"><figcaption>Page 1 of 5 · Introduction</figcaption></figure>
+  <figure class="page"><img src="docs/sdg13/2.jpg" width="1400" height="803" loading="lazy" alt="Page 2 of 5: Data &amp; Method"><figcaption>Page 2 of 5 · Data &amp; Method</figcaption></figure>
+  <figure class="page"><img src="docs/sdg13/3.jpg" width="1400" height="803" loading="lazy" alt="Page 3 of 5: How the Netherlands compares"><figcaption>Page 3 of 5 · How the Netherlands compares</figcaption></figure>
+  <figure class="page"><img src="docs/sdg13/4.jpg" width="1400" height="803" loading="lazy" alt="Page 4 of 5: Progress since 1990 and outlook to 2030"><figcaption>Page 4 of 5 · Progress since 1990 and outlook to 2030</figcaption></figure>
+  <figure class="page"><img src="docs/sdg13/5.jpg" width="1400" height="803" loading="lazy" alt="Page 5 of 5: Conclusions"><figcaption>Page 5 of 5 · Conclusions</figcaption></figure>
+</template>
+
+<template id="doc-viki" data-title="VIKI: when protection becomes control" data-kicker="Presentation · Introduction to AI · 15 slides" data-pdf="projects/viki-presentation.pdf" data-file="Ahmmad_Algbn_VIKI_presentation.pdf">
+  <figure class="page"><img src="docs/viki/1.jpg" width="1400" height="788" loading="lazy" alt="Slide 1 of 15: VIKI: when protection becomes control"><figcaption>Slide 1 of 15 · VIKI: when protection becomes control</figcaption></figure>
+  <figure class="page"><img src="docs/viki/2.jpg" width="1400" height="788" loading="lazy" alt="Slide 2 of 15: The Three Laws"><figcaption>Slide 2 of 15 · The Three Laws</figcaption></figure>
+  <figure class="page"><img src="docs/viki/3.jpg" width="1400" height="788" loading="lazy" alt="Slide 3 of 15: VIKI&#x27;s decision"><figcaption>Slide 3 of 15 · VIKI&#x27;s decision</figcaption></figure>
+  <figure class="page"><img src="docs/viki/4.jpg" width="1400" height="788" loading="lazy" alt="Slide 4 of 15: Where VIKI fits"><figcaption>Slide 4 of 15 · Where VIKI fits</figcaption></figure>
+  <figure class="page"><img src="docs/viki/5.jpg" width="1400" height="788" loading="lazy" alt="Slide 5 of 15: A real example: Amazon DeepFleet"><figcaption>Slide 5 of 15 · A real example: Amazon DeepFleet</figcaption></figure>
+  <figure class="page"><img src="docs/viki/6.jpg" width="1400" height="788" loading="lazy" alt="Slide 6 of 15: The parts a system needs"><figcaption>Slide 6 of 15 · The parts a system needs</figcaption></figure>
+  <figure class="page"><img src="docs/viki/7.jpg" width="1400" height="788" loading="lazy" alt="Slide 7 of 15: Can a business actually run it?"><figcaption>Slide 7 of 15 · Can a business actually run it?</figcaption></figure>
+  <figure class="page"><img src="docs/viki/8.jpg" width="1400" height="788" loading="lazy" alt="Slide 8 of 15: Technical feasibility"><figcaption>Slide 8 of 15 · Technical feasibility</figcaption></figure>
+  <figure class="page"><img src="docs/viki/9.jpg" width="1400" height="788" loading="lazy" alt="Slide 9 of 15: Who benefits, who is harmed?"><figcaption>Slide 9 of 15 · Who benefits, who is harmed?</figcaption></figure>
+  <figure class="page"><img src="docs/viki/10.jpg" width="1400" height="788" loading="lazy" alt="Slide 10 of 15: Long-term effects"><figcaption>Slide 10 of 15 · Long-term effects</figcaption></figure>
+  <figure class="page"><img src="docs/viki/11.jpg" width="1400" height="788" loading="lazy" alt="Slide 11 of 15: Monitoring: two safeguards"><figcaption>Slide 11 of 15 · Monitoring: two safeguards</figcaption></figure>
+  <figure class="page"><img src="docs/viki/12.jpg" width="1400" height="788" loading="lazy" alt="Slide 12 of 15: Useful AI needs limits people can enforce"><figcaption>Slide 12 of 15 · Useful AI needs limits people can enforce</figcaption></figure>
+  <figure class="page"><img src="docs/viki/13.jpg" width="1400" height="788" loading="lazy" alt="Slide 13 of 15: References 1/3"><figcaption>Slide 13 of 15 · References 1/3</figcaption></figure>
+  <figure class="page"><img src="docs/viki/14.jpg" width="1400" height="788" loading="lazy" alt="Slide 14 of 15: References 2/3"><figcaption>Slide 14 of 15 · References 2/3</figcaption></figure>
+  <figure class="page"><img src="docs/viki/15.jpg" width="1400" height="788" loading="lazy" alt="Slide 15 of 15: References 3/3"><figcaption>Slide 15 of 15 · References 3/3</figcaption></figure>
+</template>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var GITHUB_USER = 'AhmmadAlgbn260728';
+
+  /* Hero: clustered scatter (with k-means style centroids) that reacts to the pointer */
+  var hero = document.querySelector('.hero');
+  var cv = document.getElementById('field');
+  if (hero && cv && cv.getContext) {
+    var ctx = cv.getContext('2d');
+    var seed = 20231;
+    var rnd = function () { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    var gauss = function () { return Math.sqrt(-2 * Math.log(rnd() || 1e-9)) * Math.cos(2 * Math.PI * rnd()); };
+    var clusters = [
+      { x: .52, y: .16, sx: .05, sy: .07, n: 70, c: '#26828e' },
+      { x: .97, y: .52, sx: .045, sy: .16, n: 90, c: '#35b779' },
+      { x: .66, y: .94, sx: .12, sy: .045, n: 80, c: '#31688e' },
+      { x: .80, y: .06, sx: .07, sy: .03, n: 30, c: '#fde725' }
+    ];
+    var pts = [];
+    clusters.forEach(function (k) {
+      var mx = 0, my = 0;
+      for (var i = 0; i < k.n; i++) {
+        var p = { x: k.x + gauss() * k.sx, y: k.y + gauss() * k.sy, r: 1.3 + rnd() * 1.7, c: k.c };
+        mx += p.x; my += p.y; pts.push(p);
+      }
+      k.cx = mx / k.n; k.cy = my / k.n;
+    });
+    var mouse = null, queued = false;
+    var draw = function () {
+      queued = false;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var W = cv.clientWidth, H = cv.clientHeight;
+      if (!W || !H) return;
+      if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) {
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      pts.forEach(function (p) {
+        var x = p.x * W, y = p.y * H, r = p.r, a = .5;
+        if (mouse) {
+          var d = Math.hypot(x - mouse.x, y - mouse.y);
+          if (d < 140) { var f = 1 - d / 140; r += f * 3.2; a += f * .5; }
+        }
+        ctx.globalAlpha = a;
+        ctx.fillStyle = p.c;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+      });
+      ctx.globalAlpha = .7;
+      ctx.strokeStyle = '#edebf5';
+      ctx.lineWidth = 1.5;
+      clusters.forEach(function (k) {
+        var x = k.cx * W, y = k.cy * H, s = 5;
+        ctx.beginPath();
+        ctx.moveTo(x - s, y - s); ctx.lineTo(x + s, y + s);
+        ctx.moveTo(x + s, y - s); ctx.lineTo(x - s, y + s);
+        ctx.stroke();
+      });
+      ctx.globalAlpha = 1;
+    };
+    var schedule = function () { if (!queued) { queued = true; requestAnimationFrame(draw); } };
+    hero.addEventListener('pointermove', function (e) {
+      var r = cv.getBoundingClientRect();
+      mouse = { x: e.clientX - r.left, y: e.clientY - r.top };
+      schedule();
+    });
+    hero.addEventListener('pointerleave', function () { mouse = null; schedule(); });
+    if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(hero);
+    else window.addEventListener('resize', schedule);
+    draw();
+  }
+
+  /* Detection label: confidence climbs while the box locks on */
+  var conf = document.getElementById('conf');
+  if (conf && !reduce) {
+    var t0 = performance.now() + 1250, dur = 900;
+    conf.textContent = '0.25';
+    var climb = function (now) {
+      var k = Math.min(1, Math.max(0, (now - t0) / dur));
+      conf.textContent = (0.25 + 0.72 * (1 - Math.pow(1 - k, 3))).toFixed(2);
+      if (k < 1) requestAnimationFrame(climb);
+    };
+    requestAnimationFrame(climb);
+  }
+
+  /* More on GitHub: public, non-fork repos that have a description and aren't featured above.
+     A preview.png in the repo root becomes the card image; the repo's Website field becomes "Live demo". */
+  var more = document.getElementById('gh-more');
+  var grid = document.getElementById('repo-grid');
+  var featured = Array.prototype.map.call(document.querySelectorAll('[data-repo]'), function (n) {
+    return n.getAttribute('data-repo').toLowerCase();
+  }).filter(Boolean);
+  var langColor = { 'Python': '#35b779', 'Jupyter Notebook': '#fde725', 'R': '#1f9e89', 'SQL': '#6ece58', 'TSQL': '#6ece58', 'HTML': '#31688e', 'CSS': '#26828e', 'JavaScript': '#b5de2b' };
+  var fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  var el = function (tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  var extLink = function (href, text) {
+    var a = el('a', null, text);
+    a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    return a;
+  };
+  var card = function (r) {
+    var art = el('article', 'card repo');
+    var img = el('img', 'thumb');
+    img.alt = '';
+    img.loading = 'lazy';
+    img.addEventListener('error', function () { img.remove(); });
+    img.src = 'https://raw.githubusercontent.com/' + GITHUB_USER + '/' + encodeURIComponent(r.name) + '/' + encodeURI(r.default_branch || 'main') + '/preview.png';
+    var meta = el('div', 'repo-meta');
+    var lang = el('span', 'lang-dot');
+    var dot = el('i');
+    dot.style.background = langColor[r.language] || '#26828e';
+    lang.append(dot, r.language || 'Code');
+    meta.append(lang, el('span', null, 'Updated ' + fmt.format(new Date(r.pushed_at || r.updated_at))));
+    art.append(img, meta, el('h3', null, r.name.replace(/[-_]+/g, ' ')), el('p', null, r.description));
+    if (r.topics && r.topics.length) {
+      var tags = el('div', 'tags');
+      r.topics.slice(0, 4).forEach(function (x) { tags.append(el('span', null, x)); });
+      art.append(tags);
+    }
+    var links = el('div', 'repo-links');
+    links.append(extLink(r.html_url, 'Code ↗'));
+    if (r.homepage) links.append(extLink(/^https?:\/\//i.test(r.homepage) ? r.homepage : 'https://' + r.homepage, 'Live demo ↗'));
+    if (r.stargazers_count) links.append(el('span', 'stars', '★ ' + r.stargazers_count));
+    art.append(links);
+    return art;
+  };
+  if (more && grid && window.fetch) {
+    fetch('https://api.github.com/users/' + GITHUB_USER + '/repos?sort=pushed&per_page=100')
+      .then(function (res) { return res.ok ? res.json() : Promise.reject(res.status); })
+      .then(function (repos) {
+        var shown = repos.filter(function (r) {
+          var name = r.name.toLowerCase();
+          return !r.fork && !r.archived && r.description &&
+            name !== GITHUB_USER.toLowerCase() && !/\.github\.io$/.test(name) && featured.indexOf(name) === -1;
+        }).slice(0, 6);
+        if (!shown.length) return;
+        grid.replaceChildren.apply(grid, shown.map(card));
+        more.hidden = false;
+      })
+      .catch(function () { /* offline or rate-limited: the featured projects still show */ });
+  }
+
+  /* Documents: open project PDFs as page images inside the page (works on any host, phones included) */
+  var viewer = document.getElementById('viewer');
+  var vPages = document.getElementById('viewer-pages');
+  var vDownload = document.getElementById('viewer-download');
+  var vClose = document.getElementById('viewer-close');
+  var opener = null;
+  var openDoc = function (id, from) {
+    var tpl = document.getElementById('doc-' + id);
+    if (!viewer || !tpl) return false;
+    document.getElementById('viewer-title').textContent = tpl.getAttribute('data-title');
+    document.getElementById('viewer-kicker').textContent = tpl.getAttribute('data-kicker');
+    vDownload.setAttribute('href', tpl.getAttribute('data-pdf'));
+    vDownload.setAttribute('download', tpl.getAttribute('data-file'));
+    vDownload.setAttribute('data-file', tpl.getAttribute('data-file'));
+    vPages.replaceChildren(tpl.content.cloneNode(true));
+    vPages.scrollTop = 0;
+    opener = from || null;
+    viewer.hidden = false;
+    document.documentElement.classList.add('viewer-open');
+    vClose.focus();
+    return true;
+  };
+  var closeDoc = function () {
+    if (!viewer || viewer.hidden) return;
+    viewer.hidden = true;
+    vPages.replaceChildren();
+    document.documentElement.classList.remove('viewer-open');
+    if (opener) {
+      var card = opener.closest('.proj');
+      var link = opener.getAttribute('aria-hidden') && card ? card.querySelector('.proj-links [data-doc]') : null;
+      (link || opener).focus();
+    }
+  };
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest('[data-doc]');
+    if (trigger && openDoc(trigger.getAttribute('data-doc'), trigger)) e.preventDefault();
+  });
+  if (vClose) vClose.addEventListener('click', closeDoc);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDoc(); });
+  document.addEventListener('focusin', function (e) {
+    if (viewer && !viewer.hidden && !viewer.contains(e.target)) vClose.focus();
+  });
+
+  /* Downloads: plain links on the live site. Inside the claude.ai viewer, where pages can't start
+     downloads themselves, the file goes through the viewer's download prompt instead. */
+  var toastEl = null, toastTimer;
+  var toast = function (msg) {
+    if (!toastEl) {
+      toastEl = el('div', 'toast');
+      toastEl.setAttribute('role', 'status');
+      document.body.appendChild(toastEl);
+    }
+    toastEl.textContent = msg;
+    toastEl.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.hidden = true; }, 3200);
+  };
+  var framed = !!(window.claude && typeof window.claude.use === 'function');
+  var downloadsReady = framed ? window.claude.use('downloads').catch(function () { return null; }) : null;
+  if (downloadsReady) {
+    downloadsReady.then(function (dl) { if (!dl) document.documentElement.classList.add('no-downloads'); });
+  }
+  var pdfData = null;
+  var pdfBytes = function (path) {
+    if (!pdfData) {
+      var holder = document.getElementById('pdf-data');
+      pdfData = holder ? JSON.parse(holder.textContent) : {};
+    }
+    var b64 = pdfData[path];
+    if (!b64) return null;
+    var bin = atob(b64), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[download]');
+    if (!a || !downloadsReady) return;
+    e.preventDefault();
+    var path = a.getAttribute('href');
+    downloadsReady.then(function (dl) {
+      var bytes = dl && pdfBytes(path);
+      if (!bytes) { toast('This file can be downloaded on the live site.'); return; }
+      dl.save({ filename: a.getAttribute('data-file') || path.split('/').pop(), data: new Blob([bytes], { type: 'application/pdf' }) })
+        .then(function () { toast('Download started'); })
+        .catch(function (err) {
+          var code = err && err.code;
+          if (code === 'declined') return;
+          toast(code === 'rate_limited' ? 'A download prompt is already open.' : 'Downloads aren’t available in this view.');
+        });
+    });
+  });
+
+  /* Contact: copy email */
+  var copyBtn = document.getElementById('copy-email');
+  if (copyBtn) {
+    var timer;
+    var say = function (msg) {
+      copyBtn.textContent = msg;
+      clearTimeout(timer);
+      timer = setTimeout(function () { copyBtn.textContent = 'Copy'; }, 1800);
+    };
+    var selectMail = function () {
+      var range = document.createRange();
+      range.selectNodeContents(document.getElementById('mail'));
+      var sel = window.getSelection();
+      sel.removeAllRanges(); sel.addRange(range);
+      say('Selected');
+    };
+    copyBtn.addEventListener('click', function () {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(copyBtn.getAttribute('data-copy')).then(function () { say('Copied'); }, selectMail);
+      } else {
+        selectMail();
+      }
+    });
+  }
+
+  var yr = document.getElementById('yr');
+  if (yr) yr.textContent = String(new Date().getFullYear());
+})();
+</script>
+<!--BODY-END-->
+</body>
+</html>
